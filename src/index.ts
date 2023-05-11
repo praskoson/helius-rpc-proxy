@@ -51,6 +51,11 @@ export default {
 			}
 		});
 
-		return await fetch(proxyRequest);
+		const result = await fetch(proxyRequest);
+		Object.entries(corsHeaders).forEach((entry) => {
+			result.headers.append(entry[0], entry[1])
+		})
+		console.log(JSON.stringify(result.headers));
+		return result;
 	},
 };
